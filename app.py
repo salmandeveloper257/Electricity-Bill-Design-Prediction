@@ -11,10 +11,8 @@ fixed_charges = st.number_input("Fixed Charges", min_value=0.0, max_value=1000.0
 
 if st.button("Predict Price"):
        input_data = pd.DataFrame(
-        [[units, price_per_unit, fpa, tax, fixed_charges]],              
-        columns=['Units', 'Price Per Unit', 'FPA', 'Tax', 'Fixed Charges']
+              [[units, price_per_unit, fpa, tax, fixed_charges]],
+              columns=['Units', 'Price Per Unit', 'FPA', 'Tax', 'Fixed Charges']              
     )                                                                    
-    
     prediction = model1.predict(input_data)                           
-    
     st.success(f"Estimated Price: {prediction[0]:,.2f}")
