@@ -1,18 +1,49 @@
 import streamlit as st
 import pandas as pd
 import joblib
-model1 = joblib.load('model.pickle')
-st.title("Electricity Bill Design Prediction")
-units = st.number_input("Total Units", min_value=0, max_value=1000, value=500)
-price_per_unit = st.number_input("Unit Price", min_value=0.0, max_value=100.0, value=20.0)
-fpa = st.number_input("Fixed Price Adjustment", min_value=0.0, max_value=2000.0, value=200.0)
-tax = st.number_input("Tax", min_value=0.0, max_value=5000.0, value=500.0)
-fixed_charges = st.number_input("Fixed Charges", min_value=0.0, max_value=10000.0, value=1000.0)
 
-if st.button("Predict"):
+# 1. پیج کی ترتیبات (Page Setup)
+st.set_page_config(
+    page_title="Electricity Bill Predictor",
+    page_icon="⚡",
+    layout="centered"
+)
+
+# 2. ماڈل لوڈ کریں
+model1 = joblib.load('model.pickle')
+
+# 3. عنوان اور بینر
+st.title("⚡ Electricity Bill Estimator")
+st.write("برائے مہربانی اپنے بل کے حساب کے لیے نیچے دیے گئے خانے پر کریں:")
+
+# خوبصورت تصویر (Banner Image)
+st.image("https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800", use_container_width=True)
+
+st.divider()
+
+# 4. ان پٹ فیلڈز کو 2 کالموں میں تقسیم کرنا
+col1, col2 = st.columns(2)
+
+with col1:
+    units = st.number_input("Total Units", min_value=0, max_value=1000, value=500)
+    price_per_unit = st.number_input("Unit Price", min_value=0.0, max_value=100.0, value=20.0)
+    fpa = st.number_input("Fixed Price Adjustment", min_value=0.0, max_value=2000.0, value=200.0)
+
+with col2:
+    tax = st.number_input("Tax", min_value=0.0, max_value=5000.0, value=500.0)
+    fixed_charges = st.number_input("Fixed Charges", min_value=0.0, max_value=10000.0, value=1000.0)
+
+st.write("")
+
+# 5. بٹن اور پرڈکشن کا ڈسپلے
+if st.button("Calculate Bill 💡", type="primary", use_container_width=True):
     input_data = pd.DataFrame(
-        [[units, price_per_unit, fpa, tax, fixed_charges]],              
+        [[units, price_per_unit, fpa, tax, fixed_charges]],
         columns=['Units', 'Price Per Unit', 'FPA', 'Tax', 'Fixed Charges']
-    )                                                                    
-    prediction = model1.predict(input_data)                           
-    st.success(f"Estimated Price: {prediction[0]:,.2f}")   
+    )
+    
+    prediction = model1.predict(input_data)
+    
+    st.balloons() # جشن کی اینیمیشن
+    st.metric(label="Estimated Total Price", value=f"PKR {prediction[0]:,.2f}")
+
