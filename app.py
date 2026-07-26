@@ -14,7 +14,7 @@ model1 = joblib.load('model.pickle')
 
 # 3. عنوان اور بینر
 st.title("⚡ Electricity Bill Estimator")
-st.write("برائے مہربانی اپنے بل کے حساب کے لیے نیچے دیے گئے خانے پر کریں:")
+st.write("Please fill in the box below to calculate your bill:")
 
 # خوبصورت تصویر (Banner Image)
 st.image("https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800", use_container_width=True)
