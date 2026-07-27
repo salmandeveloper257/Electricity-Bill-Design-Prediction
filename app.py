@@ -26,11 +26,11 @@ col1, col2 = st.columns(2)
 
 with col1:
     units = st.number_input("Total Units", min_value=50, max_value=1000, value=800)
-    price_per_unit = st.number_input("Unit Price", min_value=10, max_value=100.0, value=80)
-    fpa = st.number_input("Fixed Price Adjustment", min_value=100, max_value=2000.0, value=1700)
+    price_per_unit = st.number_input("Unit Price", min_value=10, max_value=100, value=80)
+    fpa = st.number_input("Fixed Price Adjustment", min_value=100, max_value=2000, value=1700)
 
 with col2:
-    tax = st.number_input("Tax", min_value=300, max_value=8000.0, value=5500)
+    tax = st.number_input("Tax", min_value=300, max_value=8000, value=5500)
     fixed_charges = st.number_input("Fixed Charges", min_value=100, max_value=1000, value=800)
 
 st.write("")
